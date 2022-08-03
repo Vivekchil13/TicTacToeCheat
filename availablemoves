@@ -1,0 +1,12 @@
+def availMoves(board):
+    posMoves = []
+    count = -1
+    colCount = -1
+    for row in board:
+        count += 1
+        colCount = -1
+        for col in row:
+            colCount += 1
+            if col == '_':
+                posMoves.append([count, colCount])
+    return posMoves
