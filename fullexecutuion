@@ -1,0 +1,31 @@
+from copy import deepcopy
+import availableMoves
+import evaluateBoard
+import gameOver
+import selectSpace
+
+
+def minimax(board, is_maximizing, alpha, beta):
+        if gameOver.gameDone(board, is_maximizing):
+            return [evaluateBoard.evalBoard(board, is_maximizing)]
+        if is_maximizing:
+            sym = 'X'
+            bestVal = -1000
+        else:
+            sym = 'O'
+            bestVal = 1000
+        for move in availableMoves.availMoves(board):
+            newBoard = deepcopy(board)
+            selectSpace.selSpace(newBoard, move, sym)
+            hypoVal = minimax(newBoard, not is_maximizing, alpha, beta)[0]
+            if is_maximizing and hypoVal > bestVal:
+                bestVal = hypoVal
+                alpha = max(alpha, bestVal)
+                bestMove = move
+            if not is_maximizing and hypoVal < bestVal:
+                bestVal = hypoVal
+                beta = min(alpha, bestVal)
+                bestMove = move
+            if beta <= alpha:
+                break
+        return [bestVal, bestMove]
