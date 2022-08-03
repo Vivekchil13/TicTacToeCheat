@@ -1,0 +1,2 @@
+def selSpace(board, move, sym):
+    board[move[0]][move[1]] = sym
