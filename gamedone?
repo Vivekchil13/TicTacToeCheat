@@ -1,0 +1,6 @@
+import evaluateBoard
+import availableMoves
+def gameDone(board, is_maximizing):
+    if evaluateBoard.evalBoard(board, is_maximizing) == 1 or len(availableMoves.availMoves(board)) == 0 or evaluateBoard.evalBoard(board, is_maximizing) == -1:
+        return True
+    
